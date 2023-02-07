@@ -268,40 +268,41 @@ VALUES
 (4, "Adrián", "Fredes", 111111, "AFP C", 1, "", "Casablanca", 28 )
 ;
 
-insert into visita values 
+INSERT INTO Visita VALUES 
 ('1', '25-07-23', '16:30', 'Nogales', 'Visita sin novedades','5'),
 ('2', '28-02-23', '17:20', 'Ventana', 'Visita sin novedades','4'),
 ('3', '12-01-23', '18:00', 'Quintero', 'Atencion en enfermeria por malestares','1'),
 ('4', '30-12-22', '19:00', 'Valparaiso','Visita sin novedades','3'),
 ('5', '15-02-23', '12:30', 'Viña del mar', 'Visita sin novedades','2');
 
-insert into visitacheckeo values  
-('1','1'),
-('2','2'),
-('3','3'),
-('4','4'),
-('5','5');
 
-insert into checkeos values
+INSERT INTO checkeos VALUES
 ('1','Claudia'),
 ('2','Jorge'),
 ('3','Luisa'),
 ('4','Hugo'),
 ('5','Raquel');
 
-insert into resultadocheckeo values
+INSERT INTO visitaCheckeo VALUES  
+('1','1'),
+('2','2'),
+('3','3'),
+('4','4'),
+('5','5');
+
+INSERT INTO resultadoCheckeo VALUES
 ('1','CUMPLE'),
 ('2','CUMPLE'),
 ('3','C/OBSERVACIONES'),
 ('4','CUMPLE'),
 ('5','CUMPLE');
 
-INSERT INTO usuarios values
+INSERT INTO usuarios VALUES
 ('1','1','Matias','Calderon','2000-06-02','1'),
 ('2','2','Priscila','Carrillo','1995-05-03','2'),
 ('3','3','Leonel','Briones','1983-09-05','3'),
 ('4','4','Adrian','Fredes','1995-03-15','4'),
-('5','5','Benjamin','Pavez','1998-05-02','5')
+('5','5','Benjamin','Pavez','1998-05-02','5');
 
 /*INSERTAR REGISTROS A LA TABLA PAGOS*/
 INSERT INTO pagos
@@ -344,4 +345,32 @@ VALUES
  ('MEJORA 4', 'DESCRIPCION D', 12, 4),
  ('MEJORA 5', 'DESCRIPCION E', 4, 5)
  ;
+/*datos Priscila*/
+INSERT INTO Capacitacion
+(idCapacitacion, capFecha, capHora, capLugar, capDuracion, cliente_rutCliente)
+VALUES 
+(6, '07-02-23', '08:00', "Viña del mar", 35, 1 ),
+(7, '08-02-23', '09:00', "Valparaiso", 40, 2 ),
+(8, '09-02-23', '10:00', "Limache", 45, 3 ),
+(9, '10-02-23', '11:00', "Peñablanca", 2, 5 ),
+(10, '11-02-23', '12:00', "Quilpue", 50, 4 )
+;
 
+INSERT INTO Asistentes
+(idAsistente, asisNombreCompleto, asisEdad, capacitacion_idCapacitacion, asisCorreo, asisTelefono)
+VALUES 
+(10, "Marcos Durán", 30, 6, "marcosduran@gmail.com", 95645324 ),
+(11, "Sonia Guerra", 25, 7, "soniaguerra@gmail.com", 93409888),
+(12, "Maria Cabrera", 28, 8, "mariacabrera@gmail.com", 92332109 ),
+(13, "Monica Garrido", 29, 9, "monicagarrido@gmail.com", 97800984 ),
+(14, "Fernando Flores", 31, 10, "fernandoflores@gmail.com", 97660456)
+;
+
+/*DATOS MATIAS*/
+
+INSERT INTO Accidente (idAccidente, acciFecha, acciHora, acciLugar, acciOrigen, acciConsecuencias, cliente_rutCliente) 
+VALUES (11, '05-04-23', '22:00', 'Providencia', 'mal estacionado', 'parteEmpadronado', 1),
+		(12, '06-07-22', '21:30', 'Calle7', 'atropello', ' heridos', 2),
+		(13, '11-03-22', '15:45', 'Calle mirador', 'colicionPare', ' herido', 3),
+		(14, '06-04-19', '16:15', 'Libertad', 'PersonaCorriendo', 'caida', 5),
+		(15, '07-05-23', '17:45', 'Lomiras Bajo', 'Pelea de almunos', 'moreton', 4);
