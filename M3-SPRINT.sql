@@ -166,7 +166,7 @@ CREATE TABLE usuarios(
 );
 
 ALTER TABLE usuarios
-ADD COLUMN idUsuario INT NULL /*FK usuario*/;
+ADD COLUMN idUsuario INT NULL /*FK CLIENTE*/;
 
 ALTER TABLE usuarios
 ADD CONSTRAINT usuario_cliente_FK
@@ -223,8 +223,38 @@ FOREIGN KEY (idCliente) REFERENCES Cliente(rutCliente);
 de verificación de situaciones que pueden generar problemas en el mediano plazo. Por
 cada una de estas instancias se desea conocer un código único, la fecha de realización, el motivo por el cual se solicita y el profesional al que se asignará dicha asesoría (debe existir
 una llave foránea a la tabla profesional)*/
+CREATE TABLE asesoria(
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    fecha DATE NOT NULL,
+    motivoSolicitud VARCHAR(50) NULL,
+    idProfesional INT NOT NULL /*FK PROFESIONAL*/
+);
+
+ALTER TABLE asesoria
+ADD CONSTRAINT profesionales_asesoria_FK
+FOREIGN KEY (idProfesional) REFERENCES profesionales(rut);
+
 
 /*3.- Por cada asesoría, se generan una o más actividades de mejora, que son
 recomendaciones que el profesional hace al cliente. En cada una de estas instancias se
 registra un campo único autoincremental, el título de la actividad de mejora, la
 descripción de esta y el plazo en días de resolución.*/
+CREATE TABLE mejoras(
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    mejora VARCHAR(50) NULL,
+    descripcion VARCHAR(200) NULL,
+    plazo INT NOT NULL,
+    idAsesoria INT NOT NULL /*FK asesoria*/
+);
+ALTER TABLE mejoras
+ADD CONSTRAINT mejoras_asesoria_FK
+FOREIGN KEY (idAsesoria) REFERENCES asesoria(id);
+
+/*En base al enunciado anterior, se solicita que realice las siguientes labores como parte de esta evaluación:*/
+
+/*1.- Script completo con la creación de la base de datos. Debe crear las tablas en el orden lógico, y debe considerar en ello todas las restricciones y elementos que sea necesario abordar*/
+/*OK*/
+
+/*2.-Al script anterior debe agregar consultas de inserción de registros en cada tabla. Se pide como mínimo tres registros en cada tabla insertados. Debe cuidar el orden lógico de inserción de datos, a fin de no generar conflictos con las restricciones*/
+
+
