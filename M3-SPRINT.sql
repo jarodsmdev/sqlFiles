@@ -397,6 +397,16 @@ ON a.capacitacion_idCapacitacion = c.idCapacitacion
 WHERE cliente_rutCliente = 2
 ;
 
+/*
++--------------------+----------+-----------------------+----------------+
+| asisNombreCompleto | asisEdad | asisCorreo            | idCapacitacion |
++--------------------+----------+-----------------------+----------------+
+| Sonia Guerra       |       25 | soniaguerra@gmail.com |              7 |
++--------------------+----------+-----------------------+----------------+
+1 row in set (0,00 sec)
+
+*/
+
 /*b) Realice una consulta que permita desplegar todas las visitas en terreno realizadas a los clientes que sean de la comuna de Valparaíso. Por cada visita debe indicar todos los chequeos que se hicieron en ella, junto con el estado de cumplimiento de cada uno.*/
 
 SELECT Cliente.cliNombres, Cliente.cliComuna, Visita.idVisita, visitaCheckeo.idCheckeo, checkeos.id, checkeos.nombre,resultadoCheckeo.resultadoCheckeo
@@ -412,6 +422,16 @@ ON Cliente.rutCliente = Visita.cliente_rutCliente
 WHERE cliComuna = 'Valparaíso'
 ;
 
+/*
++------------+-------------+----------+-----------+----+---------+------------------+
+| cliNombres | cliComuna   | idVisita | idCheckeo | id | nombre  | resultadoCheckeo |
++------------+-------------+----------+-----------+----+---------+------------------+
+| Priscila   | Valparaíso  |        1 |         1 |  1 | Claudia | CUMPLE           |
++------------+-------------+----------+-----------+----+---------+------------------+
+1 row in set (0,00 sec)
+
+*/
+
 /*c) Realice una consulta que despliegue los accidentes registrados para todos los clientes, indicando los datos de detalle del accidente, y el nombre, apellido, RUT y teléfono del
 cliente al que se asocia dicha situación*/
 
@@ -422,5 +442,18 @@ ON Cliente.rutCliente = Accidente.cliente_rutCliente
 ORDER BY Accidente.acciFecha
 ;
 
+/*
++------------+----------+---------------+------------------+-------------------+------------+
+| acciFecha  | acciHora | acciLugar     | acciOrigen       | acciConsecuencias | cliNombres |
++------------+----------+---------------+------------------+-------------------+------------+
+| 2005-04-23 | 22:00:00 | Providencia   | mal estacionado  | parteEmpadronado  | Benjamín   |
+| 2006-04-19 | 16:15:00 | Libertad      | PersonaCorriendo | caida             | Priscila   |
+| 2006-07-22 | 21:30:00 | Calle7        | atropello        |  heridos          | Matías     |
+| 2007-05-23 | 17:45:00 | Lomiras Bajo  | Pelea de almunos | moreton           | Adrián     |
+| 2011-03-22 | 15:45:00 | Calle mirador | colicionPare     |  herido           | Leonel     |
++------------+----------+---------------+------------------+-------------------+------------+
+5 rows in set (0,00 sec)
+
+*/
 
 
