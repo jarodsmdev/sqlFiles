@@ -256,5 +256,14 @@ FOREIGN KEY (idAsesoria) REFERENCES asesoria(id);
 /*OK*/
 
 /*2.-Al script anterior debe agregar consultas de inserción de registros en cada tabla. Se pide como mínimo tres registros en cada tabla insertados. Debe cuidar el orden lógico de inserción de datos, a fin de no generar conflictos con las restricciones*/
+INSERT INTO Cliente
+(rutCliente, cliNombre, cliApellidos, cliTelefono, cliAfp, cliSistemaSalud, cliDireccion, cliComuna, cliEdad)
+VALUES
+(1, "Benjamín", "Pavéz", 555555, "AFP A", 1, "", "Viña del Mar", 25 ),
+(2, "Matías", "Calderón", 44444, "AFP B", 2, "", "Viña del Mar", 22 ),
+(3, "Leonel", "Briones", 33333, "AFP C", 1, "", "Quillota", 40 ),
+(5, "Priscila", "Carrillo", 222222, "AFP A", 2, "", "Valparaíso", 28 ),
+(4, "Adrián", "Fredes", 111111, "AFP C", 1, "", "Casablanca", 28 )
+;
 
 
