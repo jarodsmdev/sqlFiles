@@ -257,7 +257,7 @@ FOREIGN KEY (idAsesoria) REFERENCES asesoria(id);
 
 /*2.-Al script anterior debe agregar consultas de inserción de registros en cada tabla. Se pide como mínimo tres registros en cada tabla insertados. Debe cuidar el orden lógico de inserción de datos, a fin de no generar conflictos con las restricciones*/
 INSERT INTO Cliente
-(rutCliente, cliNombre, cliApellidos, cliTelefono, cliAfp, cliSistemaSalud, cliDireccion, cliComuna, cliEdad)
+(rutCliente, cliNombres, cliApellidos, cliTelefono, cliAfp, cliSistemaSalud, cliDireccion, cliComuna, cliEdad)
 VALUES
 (1, "Benjamín", "Pavéz", 555555, "AFP A", 1, "", "Viña del Mar", 25 ),
 (2, "Matías", "Calderón", 44444, "AFP B", 2, "", "Viña del Mar", 22 ),
@@ -266,4 +266,37 @@ VALUES
 (4, "Adrián", "Fredes", 111111, "AFP C", 1, "", "Casablanca", 28 )
 ;
 
+insert into visita values 
+('1', '25-07-23', '16:30', 'Nogales', 'Visita sin novedades','5'),
+('2', '28-02-23', '17:20', 'Ventana', 'Visita sin novedades','4'),
+('3', '12-01-23', '18:00', 'Quintero', 'Atencion en enfermeria por malestares','1'),
+('4', '30-12-22', '19:00', 'Valparaiso','Visita sin novedades','3'),
+('5', '15-02-23', '12:30', 'Viña del mar', 'Visita sin novedades','2');
 
+insert into visitacheckeo values  
+('1','1'),
+('2','2'),
+('3','3'),
+('4','4'),
+('5','5');
+
+insert into checkeos values
+('1','Claudia'),
+('2','Jorge'),
+('3','Luisa'),
+('4','Hugo'),
+('5','Raquel');
+
+insert into resultadocheckeo values
+('1','CUMPLE'),
+('2','CUMPLE'),
+('3','C/OBSERVACIONES'),
+('4','CUMPLE'),
+('5','CUMPLE');
+
+INSERT INTO usuarios values
+('1','1','Matias','Calderon','2000-06-02','1'),
+('2','2','Priscila','Carrillo','1995-05-03','2'),
+('3','3','Leonel','Briones','1983-09-05','3'),
+('4','4','Adrian','Fredes','1995-03-15','4'),
+('5','5','Benjamin','Pavez','1998-05-02','5')
