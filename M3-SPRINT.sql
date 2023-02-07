@@ -144,6 +144,7 @@ CREATE TABLE checkeos(
 ALTER TABLE visitaCheckeo
 ADD CONSTRAINT visitaCheckeo_vista_FK
 FOREIGN KEY (idVisita) REFERENCES Visita(idVisita),
+
 ADD CONSTRAINT visitaCheckeo_checkeo_FK
 FOREIGN KEY (idCheckeo) REFERENCES checkeos(id)
 ;
@@ -256,6 +257,7 @@ FOREIGN KEY (idAsesoria) REFERENCES asesoria(id);
 /*OK*/
 
 /*2.-Al script anterior debe agregar consultas de inserción de registros en cada tabla. Se pide como mínimo tres registros en cada tabla insertados. Debe cuidar el orden lógico de inserción de datos, a fin de no generar conflictos con las restricciones*/
+/*INSERTAR REGISTROS A LA TABLA CLIENTES*/
 INSERT INTO Cliente
 (rutCliente, cliNombres, cliApellidos, cliTelefono, cliAfp, cliSistemaSalud, cliDireccion, cliComuna, cliEdad)
 VALUES
@@ -300,3 +302,46 @@ INSERT INTO usuarios values
 ('3','3','Leonel','Briones','1983-09-05','3'),
 ('4','4','Adrian','Fredes','1995-03-15','4'),
 ('5','5','Benjamin','Pavez','1998-05-02','5')
+
+/*INSERTAR REGISTROS A LA TABLA PAGOS*/
+INSERT INTO pagos
+(fechaPago, montoPago, mes, anio, idCliente)
+VALUES
+('2022/7/25', 149990, 7, 2022, 1),
+('2022/4/14', 78990, 4, 2022, 2),
+('2022/3/10', 45666, 3, 2022, 3),
+('2023/1/12', 145111, 1, 2023, 4),
+('2022/8/6',  745215, 8, 2023, 5)
+;
+ /*INSERTAR REGISTROS A LA TABLA PROFESIONALES*/
+ INSERT INTO profesionales
+ (rut, nombres, apellidos, telefono, tituloProfesional, proyecto, idUsuario)
+ VALUES
+ (123, 'Juan Benito', 'Pérez Melo', 777777, 'Arquitecto', 'Proyecto A', 1),
+ (456, 'Luz María', 'González Tabilo', 888888, 'Ingeniera Civil', 'Proyecto A', 2),
+ (789, 'José Felipe', 'Rodriguez Araya', 999999, 'Ingeniero Comercial', 'Proyecto B', 3),
+ (012, 'Daniel Gustavo','Araya Carreño', 444444, 'Ingeniero Civil', 'Proyecto C', 4),
+ (345, 'Pamela Constanza', 'Berríos Gómez', 555555, 'Ingeniera Comercial', 'Proyecto D', 5)
+ ;
+ 
+ /*INGRESAR REGISTROS A LA TABLA ASESORIA*/
+ INSERT INTO asesoria
+ (fecha, motivoSolicitud, idProfesional)
+ VALUES
+ ('2023/1/14', 'ASESORIA A', 123),
+ ('2022/2/14', 'ASESORIA B', 456),
+ ('2022/1/15', 'ASESORIA C', 789),
+ ('2021/12/16', 'ASESORIA D', 012),
+ ('2021/12/14', 'ASESORIA E', 345)
+ ;
+ /*INSERTAR REGISTROS MEJORA */
+ INSERT INTO mejoras
+ (mejora, descripcion, plazo, idAsesoria)
+ VALUES
+ ('MEJORA 1', 'DESCRIPCION A', 5, 1),
+ ('MEJORA 2', 'DESCRIPCION B', 7, 2),
+ ('MEJORA 3', 'DESCRIPCION C', 4, 3),
+ ('MEJORA 4', 'DESCRIPCION D', 12, 4),
+ ('MEJORA 5', 'DESCRIPCION E', 4, 5)
+ ;
+
