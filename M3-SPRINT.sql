@@ -254,7 +254,8 @@ FOREIGN KEY (idAsesoria) REFERENCES asesoria(id);
 /*En base al enunciado anterior, se solicita que realice las siguientes labores como parte de esta evaluación:*/
 
 /*1.- Script completo con la creación de la base de datos. Debe crear las tablas en el orden lógico, y debe considerar en ello todas las restricciones y elementos que sea necesario abordar*/
-/*OK*/
+/*ESTE MISMO SCRIPT ES EL ENTREGABLE:
+ PERMITE CREAR BASE DE DATOS, CREAR TABLAS, CREAR LAS RELACIONES ENTRE TABLAS, E INSERCIÓN DE DATOS PARA POSTERIOR CONSULTA*/
 
 /*2.-Al script anterior debe agregar consultas de inserción de registros en cada tabla. Se pide como mínimo tres registros en cada tabla insertados. Debe cuidar el orden lógico de inserción de datos, a fin de no generar conflictos con las restricciones*/
 /*INSERTAR REGISTROS A LA TABLA CLIENTES*/
@@ -268,6 +269,8 @@ VALUES
 (4, "Adrián", "Fredes", 111111, "AFP C", 1, "", "Casablanca", 28 )
 ;
 
+/*DATOS BENJAMÍN PAVÉZ*/
+/*INSERTAR REGISTROS TABLA VISITA*/
 INSERT INTO Visita VALUES 
 ('1', '25-07-23', '16:30', 'Nogales', 'Visita sin novedades','5'),
 ('2', '28-02-23', '17:20', 'Ventana', 'Visita sin novedades','4'),
@@ -275,7 +278,7 @@ INSERT INTO Visita VALUES
 ('4', '30-12-22', '19:00', 'Valparaiso','Visita sin novedades','3'),
 ('5', '15-02-23', '12:30', 'Viña del mar', 'Visita sin novedades','2');
 
-
+/*INSERTAR REGISTROS TABLA CHECKEOS*/
 INSERT INTO checkeos VALUES
 ('1','Claudia'),
 ('2','Jorge'),
@@ -283,6 +286,7 @@ INSERT INTO checkeos VALUES
 ('4','Hugo'),
 ('5','Raquel');
 
+/*INSERTAR REGISTROS TABLA VISITACHECKEO*/
 INSERT INTO visitaCheckeo VALUES  
 ('1','1'),
 ('2','2'),
@@ -290,6 +294,7 @@ INSERT INTO visitaCheckeo VALUES
 ('4','4'),
 ('5','5');
 
+/*INSERTAR REGISTROS TABLA RESULTADOCHECKEO*/
 INSERT INTO resultadoCheckeo VALUES
 ('1','CUMPLE'),
 ('2','CUMPLE'),
@@ -297,6 +302,7 @@ INSERT INTO resultadoCheckeo VALUES
 ('4','CUMPLE'),
 ('5','CUMPLE');
 
+/*INSERTAR REGISTROS TABLA USUARIOS*/
 INSERT INTO usuarios VALUES
 ('1','1','Matias','Calderon','2000-06-02','1'),
 ('2','2','Priscila','Carrillo','1995-05-03','2'),
@@ -345,7 +351,8 @@ VALUES
  ('MEJORA 4', 'DESCRIPCION D', 12, 4),
  ('MEJORA 5', 'DESCRIPCION E', 4, 5)
  ;
-/*datos Priscila*/
+/*datos PRISCILA CARRILLO*/
+/*INSERTAR REGISTROS EN TABLA CAPACITACION*/
 INSERT INTO Capacitacion
 (idCapacitacion, capFecha, capHora, capLugar, capDuracion, cliente_rutCliente)
 VALUES 
@@ -356,6 +363,7 @@ VALUES
 (10, '11-02-23', '12:00', "Quilpue", 50, 4 )
 ;
 
+/*INSERTAR REGISTROS EN TABLA ASISTENTES*/
 INSERT INTO Asistentes
 (idAsistente, asisNombreCompleto, asisEdad, capacitacion_idCapacitacion, asisCorreo, asisTelefono)
 VALUES 
@@ -366,8 +374,8 @@ VALUES
 (14, "Fernando Flores", 31, 10, "fernandoflores@gmail.com", 97660456)
 ;
 
-/*DATOS MATIAS*/
-
+/*DATOS MATIAS CALDERÓN*/
+/*INSERTAR REGISTROS EN TABLA ACCIDENTE*/
 INSERT INTO Accidente (idAccidente, acciFecha, acciHora, acciLugar, acciOrigen, acciConsecuencias, cliente_rutCliente) 
 VALUES (11, '05-04-23', '22:00', 'Providencia', 'mal estacionado', 'parteEmpadronado', 1),
 		(12, '06-07-22', '21:30', 'Calle7', 'atropello', ' heridos', 2),
@@ -390,33 +398,8 @@ WHERE cliente_rutCliente = 2
 ;
 
 /*b) Realice una consulta que permita desplegar todas las visitas en terreno realizadas a los clientes que sean de la comuna de Valparaíso. Por cada visita debe indicar todos los chequeos que se hicieron en ella, junto con el estado de cumplimiento de cada uno.*/
-/*
-SELECT *
-FROM resultadoCheckeo
-WHERE checkeos_id = (select idCheckeo from checkeos inner join visitaCheckeo on visitaCheckeo.idCheckeo = checkeos.id where visitaCheckeo.idVisita = (SELECT idVisita
-FROM Visita v
-INNER JOIN Cliente c
-ON cliente_rutCliente = c.rutCliente
-WHERE c.cliComuna = 'Valparaíso'
-));
-*/
 
-/*
-SELECT *
-FROM Visita v
-INNER JOIN Cliente c
-ON cliente_rutCliente = c.rutCliente
-WHERE c.cliComuna = 'Valparaíso'
-;
-*/
-/*
-select idCheckeo from checkeos inner join visitaCheckeo on visitaCheckeo.idCheckeo = checkeos.id where visitaCheckeo.idVisita = (SELECT idVisita
-FROM Visita v
-INNER JOIN Cliente c
-ON cliente_rutCliente = c.rutCliente
-WHERE c.cliComuna = 'Valparaíso'
-);*/
-SELECT Cliente.cliComuna, Visita.idVisita, visitaCheckeo.idCheckeo, checkeos.id ,resultadoCheckeo.resultadoCheckeo
+SELECT Cliente.cliNombres, Cliente.cliComuna, Visita.idVisita, visitaCheckeo.idCheckeo, checkeos.id, checkeos.nombre,resultadoCheckeo.resultadoCheckeo
 FROM resultadoCheckeo
 INNER JOIN checkeos
 ON resultadoCheckeo.checkeos_id = checkeos.id
@@ -428,3 +411,16 @@ INNER JOIN Cliente
 ON Cliente.rutCliente = Visita.cliente_rutCliente
 WHERE cliComuna = 'Valparaíso'
 ;
+
+/*c) Realice una consulta que despliegue los accidentes registrados para todos los clientes, indicando los datos de detalle del accidente, y el nombre, apellido, RUT y teléfono del
+cliente al que se asocia dicha situación*/
+
+SELECT Accidente.acciFecha, Accidente.acciHora, Accidente.acciLugar, Accidente.acciOrigen, Accidente.acciConsecuencias, Cliente.cliNombres
+FROM Accidente
+INNER JOIN Cliente
+ON Cliente.rutCliente = Accidente.cliente_rutCliente
+ORDER BY Accidente.acciFecha
+;
+
+
+
