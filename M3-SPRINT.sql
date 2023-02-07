@@ -374,3 +374,57 @@ VALUES (11, '05-04-23', '22:00', 'Providencia', 'mal estacionado', 'parteEmpadro
 		(13, '11-03-22', '15:45', 'Calle mirador', 'colicionPare', ' herido', 3),
 		(14, '06-04-19', '16:15', 'Libertad', 'PersonaCorriendo', 'caida', 5),
 		(15, '07-05-23', '17:45', 'Lomiras Bajo', 'Pelea de almunos', 'moreton', 4);
+        
+/*Diccionario de datos del modelo, indicando como mínimo: nombre de la tabla, descripción de la función de la tabla, listado con campos de la tabla indicando nombre, tipo de dato, precisión y descripción del campo. Debe indicar finalmente cual o cuales campos son parte de la llave primaria, y con qué tablas se relaciona.*/
+
+/*Finalmente, en un archivo aparte o bien en el mismo script indicado en el punto
+inicial, genere tres consultas de búsqueda de datos, que realicen lo siguiente:*/
+
+/*a) Realice una consulta que permita listar todas las capacitaciones de un cliente en
+particular, indicando el nombre completo, la edad y el correo electrónico de los asistentes.*/
+SELECT a.asisNombreCompleto, a.asisEdad, a.asisCorreo, c.idCapacitacion
+FROM Capacitacion c
+JOIN Asistentes a
+ON a.capacitacion_idCapacitacion = c.idCapacitacion
+WHERE cliente_rutCliente = 2
+;
+
+/*b) Realice una consulta que permita desplegar todas las visitas en terreno realizadas a los clientes que sean de la comuna de Valparaíso. Por cada visita debe indicar todos los chequeos que se hicieron en ella, junto con el estado de cumplimiento de cada uno.*/
+/*
+SELECT *
+FROM resultadoCheckeo
+WHERE checkeos_id = (select idCheckeo from checkeos inner join visitaCheckeo on visitaCheckeo.idCheckeo = checkeos.id where visitaCheckeo.idVisita = (SELECT idVisita
+FROM Visita v
+INNER JOIN Cliente c
+ON cliente_rutCliente = c.rutCliente
+WHERE c.cliComuna = 'Valparaíso'
+));
+*/
+
+/*
+SELECT *
+FROM Visita v
+INNER JOIN Cliente c
+ON cliente_rutCliente = c.rutCliente
+WHERE c.cliComuna = 'Valparaíso'
+;
+*/
+/*
+select idCheckeo from checkeos inner join visitaCheckeo on visitaCheckeo.idCheckeo = checkeos.id where visitaCheckeo.idVisita = (SELECT idVisita
+FROM Visita v
+INNER JOIN Cliente c
+ON cliente_rutCliente = c.rutCliente
+WHERE c.cliComuna = 'Valparaíso'
+);*/
+SELECT Cliente.cliComuna, Visita.idVisita, visitaCheckeo.idCheckeo, checkeos.id ,resultadoCheckeo.resultadoCheckeo
+FROM resultadoCheckeo
+INNER JOIN checkeos
+ON resultadoCheckeo.checkeos_id = checkeos.id
+INNER JOIN visitaCheckeo
+ON checkeos.id = visitaCheckeo.idCheckeo
+INNER JOIN Visita
+ON visitaCheckeo.idVisita = Visita.idVisita
+INNER JOIN Cliente
+ON Cliente.rutCliente = Visita.cliente_rutCliente
+WHERE cliComuna = 'Valparaíso'
+;
